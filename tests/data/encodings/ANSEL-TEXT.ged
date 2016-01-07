@@ -1,0 +1,9 @@
+0 HEADER
+	1 SOURCE test
+	1 DESTINATION test
+	1 GEDCOM
+		2 VERSION 5.5.1
+		2 FORMAT LINEAGE-LINKED
+	1 CHARACTER ANSEL
+	1 NOTE This is an ANSEL file in FTM/windows "text" format.
+0 TRAILER

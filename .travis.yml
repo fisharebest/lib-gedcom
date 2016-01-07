@@ -1,0 +1,23 @@
+language: php
+
+php:
+  - 7.0
+  - 7.1
+
+## Non-sudo environments are faster
+sudo: false
+
+## Cache composer and vendor libraries
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+before_script:
+  - composer install
+
+script:
+  - vendor/bin/phpunit
+
+after_script:
+  - vendor/bin/coveralls -v
