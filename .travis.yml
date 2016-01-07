@@ -1,0 +1,28 @@
+language: php
+
+php:
+  - 7.0
+
+## Non-sudo environments are faster
+sudo: false
+
+## Cache composer and vendor libraries
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+## Build matrix
+env:
+  matrix:
+    - PREFER_LOWEST=""
+    - PREFER_LOWEST="--prefer-lowest"
+
+before_script:
+  - composer update $PREFER_LOWEST
+
+script:
+  - phpunit --coverage-clover tests/clover.xml
+
+after_script:
+  - php vendor/bin/coveralls -v

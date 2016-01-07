@@ -1,0 +1,46 @@
+{
+	"name": "fisharebest/lib-gedcom",
+	"description": "GEDCOM manipulation library.",
+	"keywords": [
+		"GEDCOM genealogy"
+	],
+	"license": "GPL-3.0+",
+	"type": "library",
+	"authors": [
+		{
+			"name": "Greg Roach",
+			"email": "fisharebest@gmail.com"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/fisharebest/lib-gedcom/issues",
+		"source": "https://github.com/fisharebest/lib-gedcom"
+	},
+	"homepage": "https://github.com/fisharebest/lib-gedcom",
+	"require": {
+		"php": "~7.0",
+		"ext-intl": "*",
+	  	"psr/log": "~1.0"
+
+	},
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "*",
+		"mockery/mockery": "*",
+		"phpdocumentor/phpdocumentor": "*",
+		"phpunit/phpunit": "*",
+		"satooshi/php-coveralls": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"Fisharebest\\LibGedcom\\": "src/"
+		},
+		"files": [
+			"src/autoload.php"
+		]
+	},
+	"autoload-dev": {
+		"classmap": [
+			"tests/"
+		]
+	}
+}
