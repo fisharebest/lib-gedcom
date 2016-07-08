@@ -7,19 +7,7 @@ declare(strict_types = 1);
 
 namespace Fisharebest\LibGedcom\Filters;
 
-use Fisharebest\LibGedcom\Encodings\AnselEncoding;
-use Fisharebest\LibGedcom\Encodings\AsciiEncoding;
-use Fisharebest\LibGedcom\Encodings\Cp1250Encoding;
-use Fisharebest\LibGedcom\Encodings\Cp1251Encoding;
-use Fisharebest\LibGedcom\Encodings\Cp1252Encoding;
-use Fisharebest\LibGedcom\Encodings\Cp437Encoding;
-use Fisharebest\LibGedcom\Encodings\Cp850Encoding;
 use Fisharebest\LibGedcom\Encodings\EncodingInterface;
-use Fisharebest\LibGedcom\Encodings\MacintoshEncoding;
-use Fisharebest\LibGedcom\Encodings\Utf16BeEncoding;
-use Fisharebest\LibGedcom\Encodings\Utf16LeEncoding;
-use Fisharebest\LibGedcom\Encodings\Utf8Encoding;
-use Fisharebest\LibGedcom\GedcomError;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
