@@ -8,8 +8,7 @@ declare(strict_types = 1);
 use Fisharebest\LibGedcom\Encodings\Utf16LeEncoding;
 
 /**
- * @copyright 2016 Greg Roach <fisharebest@gmail.com>
- * @license   GPLv3+
+ * Tests for class UTF16LeEncoding.
  */
 class Utf16LeEncodingTest extends TestCase{
 	public function testtoUtf16Le() {

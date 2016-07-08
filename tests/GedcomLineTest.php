@@ -16,7 +16,7 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testSimpleTag() {
 		$text = '1 TAG';
 
-		$logger = Mockery::mock(LoggerInterface::class);
+		$logger = $this->createMock(LoggerInterface::class);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -30,7 +30,7 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testSimpleXref() {
 		$text = '0 @ABC@ TAG';
 
-		$logger = Mockery::mock(LoggerInterface::class);
+		$logger = $this->createMock(LoggerInterface::class);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -44,7 +44,7 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testSimpleValue() {
 		$text = '2 SUBTAG value';
 
-		$logger = Mockery::mock(LoggerInterface::class);
+		$logger = $this->createMock(LoggerInterface::class);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -58,7 +58,7 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testSimpleLink() {
 		$text = '4 TAG @XYZ@';
 
-		$logger = Mockery::mock(LoggerInterface::class);
+		$logger = $this->createMock(LoggerInterface::class);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -72,8 +72,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testNotRecognisedAsGedcom() {
 		$text = 'Hello world!';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('error')->with('Line {0} ({1}): Not recognised as GEDCOM.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger
+			->expects($this->once())
+			->method('error')
+			->with('Line {0} ({1}): Not recognised as GEDCOM.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -87,8 +90,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testGedcomTagsAreAlwaysUpperCase() {
 		$text = '1 Tag';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): GEDCOM tags are always uppercase.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): GEDCOM tags are always uppercase.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -102,8 +108,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testIncorrectWhitespaceBeforeLevel() {
 		$text = ' 1 TAG';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace before the level.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace before the level.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -117,8 +126,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testIncorrectTabsBeforeLevel() {
 		$text = "\t1 TAG";
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace before the level.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace before the level.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -132,8 +144,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testTheLevelShouldNotHaveALeadingZero() {
 		$text = '01 TAG';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): The level should not have a leading zero.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): The level should not have a leading zero.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -147,8 +162,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testTheLevelShouldNotExceedMax() {
 		$text = '100 TAG';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): The level should not exceed {2}.', [1234, $text, 99]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): The level should not exceed {2}.', [1234, $text, 99]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -162,8 +180,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testNoWhitespaceBetweenLevelAndTag() {
 		$text = '1TAG';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace after the level.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace after the level.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -177,8 +198,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testTabBetweenLevelAndTag() {
 		$text = "1\tTAG";
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace after the level.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace after the level.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -192,8 +216,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testNoWhitespaceBetweenLevelAndXref() {
 		$text = '1@ABC@ TAG';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace after the level.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace after the level.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -207,8 +234,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testTabBetweenLevelAndXref() {
 		$text = "1\t@ABC@ TAG";
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace after the level.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace after the level.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -222,8 +252,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testTheXrefShouldNotExceed20Characters() {
 		$text = '1 @ABCDEFGHIJKLMNOPQRSTUVWXYZ@ TAG';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): The xref should not exceed {2} characters.', [1234, $text, 20]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): The xref should not exceed {2} characters.', [1234, $text, 20]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -237,8 +270,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testIncorrectWhitespaceAfterTheXref() {
 		$text = '1 @ABC@TAG';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace after the xref.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace after the xref.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -252,8 +288,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testTabAfterTheXref() {
 		$text = "1 @ABC@\tTAG";
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace after the xref.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace after the xref.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -267,8 +306,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testExtraWhitespaceAfterTheTag() {
 		$text = '1 TAG ';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -282,8 +324,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testExtraTabAfterTheTag() {
 		$text = "1 TAG\t";
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -297,8 +342,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testMissingWhitespaceAfterTheTag() {
 		$text = '1 TAG@ABC@';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -312,8 +360,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testTabAfterTheTag() {
 		$text = "1 TAG\t@ABC@";
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -327,8 +378,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testExtraWhitespaceBeforeTheLink() {
 		$text = '1 TAG  @ABC@';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -342,8 +396,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testExtraWhitespaceAfterTheLink() {
 		$text = '1 TAG @ABC@ ';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Incorrect whitespace after the link.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger 
+			->expects($this->once()) 
+			->method('warning')
+			->with('Line {0} ({1}): Incorrect whitespace after the link.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -357,8 +414,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testXrefWithCont() {
 		$text = '1 @ABC!2@ CONT foobar';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Substructures on continuation lines are ignored.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger
+			->expects($this->once())
+			->method('warning')
+			->with('Line {0} ({1}): Substructures on continuation lines are ignored.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -372,8 +432,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testXrefWithContinued() {
 		$text = '1 @ABC!2@ CONTINUED foobar';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Substructures on continuation lines are ignored.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger
+			->expects($this->once())
+			->method('warning')
+			->with('Line {0} ({1}): Substructures on continuation lines are ignored.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -387,8 +450,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testXrefWithConc() {
 		$text = '1 @ABC!2@ CONC foobar';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Substructures on continuation lines are ignored.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger
+			->expects($this->once())
+			->method('warning')
+			->with('Line {0} ({1}): Substructures on continuation lines are ignored.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -402,8 +468,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testXrefWithConcattion() {
 		$text = '1 @ABC!2@ CONCATENATION foobar';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Substructures on continuation lines are ignored.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger
+			->expects($this->once())
+			->method('warning')
+			->with('Line {0} ({1}): Substructures on continuation lines are ignored.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
@@ -417,8 +486,11 @@ class GedcomLineTest extends PHPUnit_Framework_TestCase{
 	public function testSubstructureAtLevel0() {
 		$text = '0 @ABC!2@ TAG';
 
-		$logger = Mockery::mock(LoggerInterface::class);
-		$logger->shouldReceive('warning')->with('Line {0} ({1}): Substructures cannot occur at level 0.', [1234, $text]);
+		$logger = $this->createMock(LoggerInterface::class);
+		$logger
+			->expects($this->once())
+			->method('warning')
+			->with('Line {0} ({1}): Substructures cannot occur at level 0.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 

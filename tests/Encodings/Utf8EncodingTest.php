@@ -8,8 +8,7 @@ declare(strict_types = 1);
 use Fisharebest\LibGedcom\Encodings\Utf8Encoding;
 
 /**
- * @copyright 2016 Greg Roach <fisharebest@gmail.com>
- * @license   GPLv3+
+ * Tests for class Utf8Encoding.
  */
 class Utf8EncodingTest extends TestCase{
 	public function testtoUtf8() {

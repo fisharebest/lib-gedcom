@@ -8,8 +8,7 @@ declare(strict_types = 1);
 use Fisharebest\LibGedcom\Encodings\AsciiEncoding;
 
 /**
- * @copyright 2016 Greg Roach <fisharebest@gmail.com>
- * @license   GPLv3+
+ * Tests for class AsciiEncoding.
  */
 class AsciiEncodingTest extends TestCase{
 	private $test_data = [

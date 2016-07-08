@@ -8,8 +8,7 @@ declare(strict_types = 1);
 use Fisharebest\LibGedcom\Encodings\MacintoshEncoding;
 
 /**
- * @copyright 2016 Greg Roach <fisharebest@gmail.com>
- * @license   GPLv3+
+ * Tests for class MacintoshEncoding.
  */
 class MacintoshEncodingTest extends TestCase{
 	public function testtoUtf8HexStrings() {

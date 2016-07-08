@@ -8,8 +8,7 @@ declare(strict_types = 1);
 use Fisharebest\LibGedcom\Encodings\Cp1251Encoding;
 
 /**
- * @copyright 2016 Greg Roach <fisharebest@gmail.com>
- * @license   GPLv3+
+ * Tests for class Cp1251Encoding.
  */
 class Cp1251EncodingTest extends TestCase {
 	private $test_data = [

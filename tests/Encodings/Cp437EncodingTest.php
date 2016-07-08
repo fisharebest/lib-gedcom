@@ -8,8 +8,7 @@ declare(strict_types = 1);
 use Fisharebest\LibGedcom\Encodings\Cp437Encoding;
 
 /**
- * @copyright 2016 Greg Roach <fisharebest@gmail.com>
- * @license   GPLv3+
+ * Tests for class Cp437Encoding.
  */
 class Cp437EncodingTest extends TestCase{
 	private $test_data = [

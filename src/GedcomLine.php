@@ -84,12 +84,12 @@ class GedcomLine {
 			if ($match[self::REGEX_GEDCOM_LINE_ZEROES] !== '') {
 				$logger->warning(GedcomError::GEDCOM_LINE_LEADING_ZERO, [$line_number, $text]);
 			}
-			if ($this->getLevel() > self::MAXIMUM_LEVEL) {
-				$logger->warning(GedcomError::GEDCOM_MAX_LINE_LEVEL, [$line_number, $text, self::MAXIMUM_LEVEL]);
-			}
 			$this->setLevel((int) $match[self::REGEX_GEDCOM_LINE_LEVEL]);
 			if ($match[self::REGEX_GEDCOM_LINE_SPACE1] !== ' ') {
 				$logger->warning(GedcomError::GEDCOM_LINE_SPACE_AFTER_LEVEL, [$line_number, $text]);
+			}
+			if ($this->getLevel() > self::MAXIMUM_LEVEL) {
+				$logger->warning(GedcomError::GEDCOM_MAX_LINE_LEVEL, [$line_number, $text, self::MAXIMUM_LEVEL]);
 			}
 
 			// XREF
@@ -112,7 +112,7 @@ class GedcomLine {
 
 			// LINK or VALUE
 			if (!empty($match[self::REGEX_GEDCOM_LINE_LINK])) {
-				if ($match[self::REGEX_GEDCOM_LINE_AT_1] !== '@') {
+				if ($match[self::REGEX_GEDCOM_LINE_SPACE3] !== ' ' || $match[self::REGEX_GEDCOM_LINE_AT_1] !== '@') {
 					$logger->warning(GedcomError::GEDCOM_LINE_SPACE_AFTER_TAG, [$line_number, $text]);
 				}
 				if ($match[self::REGEX_GEDCOM_LINE_AT_2] !== '@') {
