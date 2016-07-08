@@ -31,7 +31,7 @@ use Psr\Log\NullLogger;
  * Normalize line endings
  * Merge CONC records
  */
-class GedcomToUtf8 extends \php_user_filter {
+class FilterEncoding extends \php_user_filter {
 	/** GEDCOM tag-names and their corresponding GEDCOM tags */
 	const GEDCOM_TAG_NAMES = [
 		'ABBREVIATION'        => 'ABBR',
@@ -184,7 +184,7 @@ class GedcomToUtf8 extends \php_user_filter {
 		// While input data is available, continue to read it.
 		while ($bucket_in = stream_bucket_make_writeable($in)) {
 			$this->data .= $bucket_in->data;
-			$consumed += $bucket_in->datalen;
+			$consumed   += $bucket_in->datalen;
 
 			// While we have complete records, process them.
 			while (preg_match('/(.*[\r\n]\s*)(0.*)/s', $this->data, $match) === 1) {
@@ -216,8 +216,8 @@ class GedcomToUtf8 extends \php_user_filter {
 	 * @return bool
 	 */
 	public function onCreate(): bool {
-		$this->data     = '';
-		$this->logger   = $this->params['logger'] ?? new NullLogger;
+		$this->data           = '';
+		$this->logger         = $this->params['logger'] ?? new NullLogger;
 		$this->input_encoding = $this->params['input_encoding'] ?? null;
 
 		return true;
@@ -335,7 +335,6 @@ class GedcomToUtf8 extends \php_user_filter {
 
 		case 'MACINTOSH':
 			$this->logger->error(GedcomError::CHARSET_INVALID, [$char]);
-			$this->logger->warning(GedcomError::CHARSET_AMBIGUOUS, [$char]);
 			$this->logger->notice(GedcomError::CHARSET_ASSUMED, ['MacOS Roman']);
 
 			return new MacintoshEncoding;
@@ -345,7 +344,6 @@ class GedcomToUtf8 extends \php_user_filter {
 		case 'IBM-PC': // Cumberland Family Tree
 		case 'OEM':    // Généatique
 			$this->logger->error(GedcomError::CHARSET_INVALID, [$char]);
-			$this->logger->warning(GedcomError::CHARSET_AMBIGUOUS, [$char]);
 			$this->logger->notice(GedcomError::CHARSET_ASSUMED, ['Code Page 437']);
 
 			return new Cp437Encoding;
@@ -354,7 +352,6 @@ class GedcomToUtf8 extends \php_user_filter {
 		case 'IBM DOS': // Reunion, EasyTree
 		case 'MS-DOS':  // AbrEdit, FTMwin
 			$this->logger->error(GedcomError::CHARSET_INVALID, [$char]);
-			$this->logger->warning(GedcomError::CHARSET_AMBIGUOUS, [$char]);
 			$this->logger->notice(GedcomError::CHARSET_ASSUMED, ['Code Page 850']);
 
 			return new Cp850Encoding;
@@ -376,7 +373,6 @@ class GedcomToUtf8 extends \php_user_filter {
 		case 'IBM WINDOWS': // EasyTree, Généalogie, Reunion, TribalPages
 		case 'IBM_WINDOWS': // EasyTree
 			$this->logger->error(GedcomError::CHARSET_INVALID, [$char]);
-			$this->logger->warning(GedcomError::CHARSET_AMBIGUOUS, [$char]);
 			$this->logger->notice(GedcomError::CHARSET_ASSUMED, ['Code Page 1252']);
 
 			return new Cp1252Encoding;

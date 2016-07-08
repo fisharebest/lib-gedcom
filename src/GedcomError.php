@@ -11,7 +11,6 @@ namespace Fisharebest\LibGedcom;
  * Error messages when manipulating GEDCOM data.
  */
 class GedcomError {
-	const CHARSET_AMBIGUOUS    = 'The character set "{0}" is ambiguous.';
 	const CHARSET_ASSUMED      = 'The character set {0} was assumed.';
 	const CHARSET_BOM_UTF8     = 'The GEDCOM file has a UTF-8 byte-order mark and specifies character set {0}.';
 	const CHARSET_DETECTED     = 'The character set {0} was detected.';

@@ -31,7 +31,7 @@ A stream filter is available to normalize files as they are read.
 ```
 $input = fopen('php://stdin', 'r');
 $output = fopen('php://stdout', 'w');
-stream_filter_append($input, \Fisharebest\LibGedcom\Filters\GedcomToUtf8::class);
+stream_filter_append($input, \Fisharebest\LibGedcom\Filters\FilterEncoding::class);
 stream_copy_to_stream($input, $output);
 fclose($input);
 fclose($output);
@@ -45,5 +45,5 @@ $options = [
 	'input_encoding' => new \FishAreBest\Encodings\AnselEncoding,
 	'logger'         => new \Psr\Log\NullLogger,
 ];
-stream_filter_append($input, \Fisharebest\LibGedcom\Filters\GedcomToUtf8::class, null, $options);
+stream_filter_append($input, \Fisharebest\LibGedcom\Filters\FilterEncoding::class, null, $options);
 ```

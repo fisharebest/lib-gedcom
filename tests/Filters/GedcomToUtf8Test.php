@@ -16,7 +16,7 @@ use Fisharebest\LibGedcom\Encodings\MacintoshEncoding;
 use Fisharebest\LibGedcom\Encodings\Utf16BeEncoding;
 use Fisharebest\LibGedcom\Encodings\Utf16LeEncoding;
 use Fisharebest\LibGedcom\Encodings\Utf8Encoding;
-use Fisharebest\LibGedcom\Filters\GedcomToUtf8;
+use Fisharebest\LibGedcom\Filters\FilterEncoding;
 use Fisharebest\LibGedcom\GedcomFile;
 use Psr\Log\LoggerInterface;
 
@@ -26,7 +26,7 @@ use Psr\Log\LoggerInterface;
  */
 class GedcomToUtf8Test extends PHPUnit_Framework_TestCase{
 	public function setUp() {
-		stream_filter_register('gedcom_to_utf8', GedcomToUtf8::class);
+		stream_filter_register('gedcom_to_utf8', FilterEncoding::class);
 	}
 
 	/**

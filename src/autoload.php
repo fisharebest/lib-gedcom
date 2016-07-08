@@ -5,6 +5,6 @@
  */
 declare(strict_types = 1);
 
-use Fisharebest\LibGedcom\Filters\GedcomToUtf8;
+use Fisharebest\LibGedcom\Filters\FilterEncoding;
 
-stream_filter_register(GedcomToUtf8::class, GedcomToUtf8::class);
+stream_filter_register(FilterEncoding::class, FilterEncoding::class);
