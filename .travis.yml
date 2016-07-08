@@ -3,9 +3,6 @@ language: php
 php:
   - 7.0
   - nightly
-  - hhvm
-  - hhvm-nightly
-
 
 ## Non-sudo environments are faster
 sudo: false
