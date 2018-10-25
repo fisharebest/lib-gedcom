@@ -59,7 +59,7 @@ class FilterEncoding extends AbstractGedcomFilter {
 
         // UTF encodings are unambiguous
         foreach ($encoding_helper->utf16MagicStrings() as $magic_string => $encoding) {
-            if (substr_compare($gedcom_record, $magic_string, 0, strlen($magic_string)) === 0) {
+            if (substr_compare($gedcom_record, $magic_string, 0, \strlen($magic_string)) === 0) {
                 $this->logger->info(self::CHARSET_DETECTED, [$encoding::ENCODING_NAME]);
 
                 return $encoding;
@@ -82,7 +82,7 @@ class FilterEncoding extends AbstractGedcomFilter {
 
         foreach ($encoding_helper->characterSetsEncodings() as $character_sets_encoding) {
             list($character_sets, $encoding) = $character_sets_encoding;
-            if (in_array($char, $character_sets)) {
+            if (\in_array($char, $character_sets, true)) {
                 if ($char === $encoding::ENCODING_NAME) {
                     $this->logger->info(self::CHARSET_DETECTED, [$char]);
                 } else {

@@ -7,13 +7,14 @@ declare(strict_types=1);
 
 namespace Fisharebest\LibGedcom\Filters;
 
+use php_user_filter;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
 /**
  * Filter a GEDCOM data stream, one record at a time.
  */
-abstract class AbstractGedcomFilter extends \php_user_filter {
+abstract class AbstractGedcomFilter extends php_user_filter {
     /** Error messages */
     const CHARSET_ASSUMED  = 'The character set {0} was assumed.';
     const CHARSET_DETECTED = 'The character set {0} was detected.';
