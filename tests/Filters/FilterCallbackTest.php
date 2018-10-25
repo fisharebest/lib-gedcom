@@ -59,7 +59,7 @@ class FilterCallbackTest extends TestCase
 
 		stream_filter_append($input, FilterCallback::class, STREAM_FILTER_READ, [
 			'callback' => function (string $data) use ($output): string {
-				$this->assertSame($data, $output->current());
+				static::assertSame($data, $output->current());
 				$output->next();
 
 				return $data;
@@ -71,6 +71,6 @@ class FilterCallbackTest extends TestCase
 		fclose($input);
 
 		$output->next();
-		$this->assertNull($output->current());
+		static::assertNull($output->current());
 	}
 }

@@ -23,7 +23,7 @@ class Utf16BeEncodingTest extends TestCase
 
 		for ($i = 0; $i < 128; ++$i) {
 			$char = chr($i);
-			$this->assertSame($char, $encoding->toUtf8("\x00" . $char));
+			static::assertSame($char, $encoding->toUtf8("\x00" . $char));
 		}
 	}
 
@@ -33,8 +33,8 @@ class Utf16BeEncodingTest extends TestCase
 	public function testfromUtf16BeTrimBom() {
 		$encoding = new Utf16BeEncoding;
 
-		$this->assertSame('AB', $encoding->toUtf8("\xFE\xFF\x00A\x00B"));
-		$this->assertSame("A\u{FEFF}B", $encoding->toUtf8("\x00A\xFE\xFF\x00B"));
+		static::assertSame('AB', $encoding->toUtf8("\xFE\xFF\x00A\x00B"));
+		static::assertSame("A\u{FEFF}B", $encoding->toUtf8("\x00A\xFE\xFF\x00B"));
 	}
 
 	/**
@@ -45,7 +45,7 @@ class Utf16BeEncodingTest extends TestCase
 
 		for ($i = 0; $i < 128; ++$i) {
 			$char = chr($i);
-			$this->assertSame("\x00" . $char, $encoding->fromUtf8($char));
+			static::assertSame("\x00" . $char, $encoding->fromUtf8($char));
 		}
 	}
 }
