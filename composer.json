@@ -20,11 +20,12 @@
 	"require": {
 		"php": "~7.0",
 		"ext-intl": "*",
+		"ext-iconv": "*",
 		"psr/log": "~1.0"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "*",
-		"satooshi/php-coveralls": "*"
+		"phpunit/phpunit": "~6.0",
+		"satooshi/php-coveralls": "~2.0"
 	},
 	"autoload": {
 		"psr-4": {
