@@ -147,7 +147,7 @@ class GedcomLine {
             }
 
             // Sub-structures can only be defined at levels greater than zero.
-            if (strpos($this->getXref(), '!') !== false && $this->getLevel() === 0) {
+            if ($this->getLevel() === 0 && strpos($this->getXref(), '!') !== false) {
                 $logger->warning(self::GEDCOM_LINE_SUBSTRUCTURE_LEVEL_0, [$line_number, $text]);
             }
 
