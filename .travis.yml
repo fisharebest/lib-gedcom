@@ -3,6 +3,15 @@ language: php
 php:
   - 7.0
   - 7.1
+  - 7.2
+  - 7.3
+  - nightly
+  - hhvm
+
+env:
+  matrix:
+    - PREFER="--prefer-lowest"
+    - PREFER=""
 
 ## Non-sudo environments are faster
 sudo: false
@@ -13,11 +22,12 @@ cache:
     - vendor
     - $HOME/.composer/cache
 
-before_script:
-  - composer install
+install:
+  - composer update --no-interaction $PREFER
+  - composer info
 
 script:
   - vendor/bin/phpunit
 
 after_script:
-  - vendor/bin/coveralls -v
+  - vendor/bin/php-coveralls --verbose
