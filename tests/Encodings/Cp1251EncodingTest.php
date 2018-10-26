@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright 2017 Greg Roach <fisharebest@gmail.com>
+ * @copyright 2018 Greg Roach <fisharebest@gmail.com>
  * @license   GPLv3+
  */
 declare(strict_types=1);

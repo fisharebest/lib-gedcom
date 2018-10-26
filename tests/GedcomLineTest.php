@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright 2017 Greg Roach <fisharebest@gmail.com>
+ * @copyright 2018 Greg Roach <fisharebest@gmail.com>
  * @license   GPLv3+
  */
 declare(strict_types=1);
@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 /**
- * @copyright 2017 Greg Roach <fisharebest@gmail.com>
+ * @copyright 2018 Greg Roach <fisharebest@gmail.com>
  * @license   GPLv3+
  */
 class GedcomLineTest extends TestCase
