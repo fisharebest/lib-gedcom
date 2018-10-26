@@ -60,7 +60,7 @@ class AsciiEncodingTest extends TestCase
 		$encoding = new AsciiEncoding;
 
 		foreach (self::TEST_DATA as $utf8 => $other) {
-			$this->assertSame($utf8, $encoding->toUtf8($other));
+			static::assertSame($utf8, $encoding->toUtf8($other));
 		}
 	}
 
@@ -71,7 +71,7 @@ class AsciiEncodingTest extends TestCase
 		$encoding = new AsciiEncoding;
 
 		foreach (self::TEST_DATA as $utf8 => $other) {
-			$this->assertSame($other, $encoding->fromUtf8($utf8));
+			static::assertSame($other, $encoding->fromUtf8($utf8));
 		}
 	}
 
@@ -82,7 +82,7 @@ class AsciiEncodingTest extends TestCase
 		$encoding = new AsciiEncoding;
 
 		foreach (self::UNPRINTABLE as $chars) {
-			$this->assertSame('', $encoding->toUtf8($chars));
+			static::assertSame('', $encoding->toUtf8($chars));
 		}
 	}
 }

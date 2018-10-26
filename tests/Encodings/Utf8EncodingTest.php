@@ -23,7 +23,7 @@ class Utf8EncodingTest extends TestCase
 
 		for ($i = 0; $i < 128; ++$i) {
 			$char = chr($i);
-			$this->assertSame($char, $encoding->toUtf8($char));
+			static::assertSame($char, $encoding->toUtf8($char));
 		}
 	}
 
@@ -33,7 +33,7 @@ class Utf8EncodingTest extends TestCase
 	public function testfromUtf8InvalidByteSequencesAreIgnored() {
 		$encoding = new Utf8Encoding;
 
-		$this->assertSame('ABCD', $encoding->toUtf8("AB\xFFCD"));
+		static::assertSame('ABCD', $encoding->toUtf8("AB\xFFCD"));
 	}
 
 	/**
@@ -42,8 +42,8 @@ class Utf8EncodingTest extends TestCase
 	public function testfromUtf8TrimBom() {
 		$encoding = new Utf8Encoding;
 
-		$this->assertSame('ABCD', $encoding->toUtf8("\u{FEFF}ABCD"));
-		$this->assertSame("AB\u{FEFF}CD", $encoding->toUtf8("AB\u{FEFF}CD"));
+		static::assertSame('ABCD', $encoding->toUtf8("\u{FEFF}ABCD"));
+		static::assertSame("AB\u{FEFF}CD", $encoding->toUtf8("AB\u{FEFF}CD"));
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Utf8EncodingTest extends TestCase
 
 		for ($i = 0; $i < 128; ++$i) {
 			$char = chr($i);
-			$this->assertSame($char, $encoding->fromUtf8($char));
+			static::assertSame($char, $encoding->fromUtf8($char));
 		}
 	}
 }

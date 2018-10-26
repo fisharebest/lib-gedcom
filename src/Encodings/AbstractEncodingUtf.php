@@ -33,7 +33,7 @@ abstract class AbstractEncodingUtf extends AbstractEncodingIconv {
      * @return string
      */
     public function toUtf8(string $text): string {
-        $bom_length = strlen(static::BYTE_ORDER_MARK);
+        $bom_length = \strlen(static::BYTE_ORDER_MARK);
         if (substr_compare($text, static::BYTE_ORDER_MARK, 0, $bom_length) === 0) {
             $text = substr($text, $bom_length);
         }

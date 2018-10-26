@@ -24,11 +24,11 @@ class GedcomLineTest extends TestCase
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testSimpleXref() {
@@ -38,11 +38,11 @@ class GedcomLineTest extends TestCase
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(0, $line->getLevel());
-		$this->assertSame('ABC', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(0, $line->getLevel());
+		static::assertSame('ABC', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testSimpleValue() {
@@ -52,11 +52,11 @@ class GedcomLineTest extends TestCase
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(2, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('SUBTAG', $line->getTag());
-		$this->assertSame('value', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(2, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('SUBTAG', $line->getTag());
+		static::assertSame('value', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testSimpleLink() {
@@ -66,11 +66,11 @@ class GedcomLineTest extends TestCase
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(4, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('XYZ', $line->getLink());
+		static::assertSame(4, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('XYZ', $line->getLink());
 	}
 
 	public function testNotRecognisedAsGedcom() {
@@ -78,17 +78,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('Line {0} ({1}): Not recognised as GEDCOM.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(0, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(0, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testGedcomTagsAreAlwaysUpperCase() {
@@ -96,17 +96,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): GEDCOM tags are always uppercase.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testIncorrectWhitespaceBeforeLevel() {
@@ -114,17 +114,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace before the level.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testIncorrectTabsBeforeLevel() {
@@ -132,17 +132,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace before the level.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testTheLevelShouldNotHaveALeadingZero() {
@@ -150,17 +150,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): The level should not have a leading zero.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testTheLevelShouldNotExceedMax() {
@@ -168,17 +168,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): The level should not exceed {2}.', [1234, $text, 99]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(100, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(100, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testNoWhitespaceBetweenLevelAndTag() {
@@ -186,17 +186,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the level.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testTabBetweenLevelAndTag() {
@@ -204,17 +204,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the level.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testNoWhitespaceBetweenLevelAndXref() {
@@ -222,17 +222,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the level.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('ABC', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('ABC', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testTabBetweenLevelAndXref() {
@@ -240,17 +240,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the level.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('ABC', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('ABC', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testTheXrefShouldNotExceed20Characters() {
@@ -258,17 +258,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): The xref should not exceed {2} characters.', [1234, $text, 20]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('ABCDEFGHIJKLMNOPQRSTUVWXYZ', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('ABCDEFGHIJKLMNOPQRSTUVWXYZ', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testIncorrectWhitespaceAfterTheXref() {
@@ -276,17 +276,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the xref.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('ABC', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('ABC', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testTabAfterTheXref() {
@@ -294,17 +294,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the xref.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('ABC', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('ABC', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testExtraWhitespaceAfterTheTag() {
@@ -312,17 +312,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testExtraTabAfterTheTag() {
@@ -330,17 +330,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testMissingWhitespaceAfterTheTag() {
@@ -348,17 +348,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('ABC', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('ABC', $line->getLink());
 	}
 
 	public function testTabAfterTheTag() {
@@ -366,17 +366,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('ABC', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('ABC', $line->getLink());
 	}
 
 	public function testExtraWhitespaceBeforeTheLink() {
@@ -384,17 +384,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('ABC', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('ABC', $line->getLink());
 	}
 
 	public function testExtraWhitespaceAfterTheLink() {
@@ -402,17 +402,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the link.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('ABC', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('ABC', $line->getLink());
 	}
 
 	public function testNoSpaceAfterTag() {
@@ -420,17 +420,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Incorrect whitespace after the tag.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('<>', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('<>', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testXrefWithCont() {
@@ -438,17 +438,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Substructures on continuation lines are ignored.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('CONT', $line->getTag());
-		$this->assertSame('foobar', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('CONT', $line->getTag());
+		static::assertSame('foobar', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testXrefWithContinued() {
@@ -456,17 +456,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Substructures on continuation lines are ignored.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('CONTINUED', $line->getTag());
-		$this->assertSame('foobar', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('CONTINUED', $line->getTag());
+		static::assertSame('foobar', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testXrefWithConc() {
@@ -474,17 +474,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Substructures on continuation lines are ignored.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('CONC', $line->getTag());
-		$this->assertSame('foobar', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('CONC', $line->getTag());
+		static::assertSame('foobar', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testXrefWithConcattion() {
@@ -492,17 +492,17 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Substructures on continuation lines are ignored.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(1, $line->getLevel());
-		$this->assertSame('', $line->getXref());
-		$this->assertSame('CONCATENATION', $line->getTag());
-		$this->assertSame('foobar', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(1, $line->getLevel());
+		static::assertSame('', $line->getXref());
+		static::assertSame('CONCATENATION', $line->getTag());
+		static::assertSame('foobar', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 
 	public function testSubstructureAtLevel0() {
@@ -510,16 +510,16 @@ class GedcomLineTest extends TestCase
 
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('warning')
 			->with('Line {0} ({1}): Substructures cannot occur at level 0.', [1234, $text]);
 
 		$line = new GedcomLine(1234, $text, $logger);
 
-		$this->assertSame(0, $line->getLevel());
-		$this->assertSame('ABC!2', $line->getXref());
-		$this->assertSame('TAG', $line->getTag());
-		$this->assertSame('', $line->getValue());
-		$this->assertSame('', $line->getLink());
+		static::assertSame(0, $line->getLevel());
+		static::assertSame('ABC!2', $line->getXref());
+		static::assertSame('TAG', $line->getTag());
+		static::assertSame('', $line->getValue());
+		static::assertSame('', $line->getLink());
 	}
 }

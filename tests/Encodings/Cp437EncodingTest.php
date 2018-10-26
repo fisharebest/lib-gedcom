@@ -57,7 +57,7 @@ class Cp437EncodingTest extends TestCase
 		$encoding = new Cp437Encoding;
 
 		foreach (self::TEST_DATA as $utf8 => $other) {
-			$this->assertSame($utf8, $encoding->toUtf8($other));
+			static::assertSame($utf8, $encoding->toUtf8($other));
 		}
 	}
 
@@ -68,7 +68,7 @@ class Cp437EncodingTest extends TestCase
 		$encoding = new Cp437Encoding;
 
 		foreach (self::TEST_DATA as $utf8 => $other) {
-			$this->assertSame($other, $encoding->fromUtf8($utf8));
+			static::assertSame($other, $encoding->fromUtf8($utf8));
 		}
 	}
 }

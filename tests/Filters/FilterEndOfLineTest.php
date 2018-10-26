@@ -25,7 +25,7 @@ class FilterEndOfLineTest extends TestCase
 		$input  = "\n FOO\nBAR \n BAZ \n";
 		$output = "\n FOO\nBAR \n BAZ \n";
 
-		$this->assertSame($output, $this->filterString($input, $logger));
+		static::assertSame($output, $this->filterString($input, $logger));
 	}
 
 	/**
@@ -37,7 +37,7 @@ class FilterEndOfLineTest extends TestCase
 		$input  = "\r FOO\rBAR \r BAZ \r";
 		$output = "\n FOO\nBAR \n BAZ \n";
 
-		$this->assertSame($output, $this->filterString($input, $logger));
+		static::assertSame($output, $this->filterString($input, $logger));
 	}
 
 	/**
@@ -49,7 +49,7 @@ class FilterEndOfLineTest extends TestCase
 		$input  = "\r\n FOO\r\nBAR \r\n BAZ \r\n";
 		$output = "\n FOO\nBAR \n BAZ \n";
 
-		$this->assertSame($output, $this->filterString($input, $logger));
+		static::assertSame($output, $this->filterString($input, $logger));
 	}
 
 	/**
@@ -61,7 +61,7 @@ class FilterEndOfLineTest extends TestCase
 		$input  = "\n\r FOO\n\rBAR \n\r BAZ \n\r";
 		$output = "\n FOO\nBAR \n BAZ \n";
 
-		$this->assertSame($output, $this->filterString($input, $logger));
+		static::assertSame($output, $this->filterString($input, $logger));
 	}
 
 	/**
@@ -73,7 +73,7 @@ class FilterEndOfLineTest extends TestCase
 		$input  = "\n\n\r FOO\n\r\nBAR \r\n\r BAZ \n\r\r";
 		$output = "\n FOO\nBAR \n BAZ \n";
 
-		$this->assertSame($output, $this->filterString($input, $logger));
+		static::assertSame($output, $this->filterString($input, $logger));
 	}
 
 	/**
@@ -85,7 +85,7 @@ class FilterEndOfLineTest extends TestCase
 		$input  = "\r \n  \r\n\t \t\n\r";
 		$output = "\n \n  \n\t \t\n";
 
-		$this->assertSame($output, $this->filterString($input, $logger));
+		static::assertSame($output, $this->filterString($input, $logger));
 	}
 
 	/**

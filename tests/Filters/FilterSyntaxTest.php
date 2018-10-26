@@ -25,7 +25,7 @@ class FilterSyntaxTest extends TestCase
 		$input  = "1 FOO hello\n2 CONC  world\n";
 		$output = "1 FOO hello world\n";
 
-		$this->assertSame($output, $this->filterString($input, $logger));
+		static::assertSame($output, $this->filterString($input, $logger));
 	}
 
 	/**

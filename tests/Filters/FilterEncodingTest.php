@@ -22,7 +22,7 @@ class FilterEncodingTest extends TestCase
 	public function testDetectAscii() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('info')
 			->with('The character set {0} was detected.', ['ASCII']);
 
@@ -35,7 +35,7 @@ class FilterEncodingTest extends TestCase
 	public function testDetectAnsel() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('info')
 			->with('The character set {0} was detected.', ['ANSEL']);
 
@@ -48,7 +48,7 @@ class FilterEncodingTest extends TestCase
 	public function testDetectAnselBom() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('info')
 			->with('The character set {0} was detected.', ['UTF-8']);
 
@@ -61,7 +61,7 @@ class FilterEncodingTest extends TestCase
 	public function testDetectAnselText() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('info')
 			->with('The character set {0} was detected.', ['ANSEL']);
 
@@ -74,7 +74,7 @@ class FilterEncodingTest extends TestCase
 	public function testDetectAnselCr() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('info')
 			->with('The character set {0} was detected.', ['ANSEL']);
 
@@ -87,7 +87,7 @@ class FilterEncodingTest extends TestCase
 	public function testDetectAnselCrLf() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('info')
 			->with('The character set {0} was detected.', ['ANSEL']);
 
@@ -99,7 +99,7 @@ class FilterEncodingTest extends TestCase
 	 */
 	public function testDetectAnselLfCr() {
 		$logger = $this->createMock(LoggerInterface::class);
-		$logger->expects($this->once())->method('info')->with('The character set {0} was detected.', ['ANSEL']);
+		$logger->expects(static::once())->method('info')->with('The character set {0} was detected.', ['ANSEL']);
 
 		$this->readFile('ANSEL-LFCR.ged', $logger);
 	}
@@ -110,7 +110,7 @@ class FilterEncodingTest extends TestCase
 	public function testDetectUtf8() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('info')
 			->with('The character set {0} was detected.', ['UTF-8']);
 
@@ -123,11 +123,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectUnicode() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['UNICODE']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['UTF-8']);
 
@@ -140,7 +140,7 @@ class FilterEncodingTest extends TestCase
 	public function testDetectUtf8Bom() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('info')
 			->with('The character set {0} was detected.', ['UTF-8']);
 
@@ -153,7 +153,7 @@ class FilterEncodingTest extends TestCase
 	public function testDetectUtf16Le() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('info')
 			->with('The character set {0} was detected.', ['UTF-16LE']);
 
@@ -166,7 +166,7 @@ class FilterEncodingTest extends TestCase
 	public function testDetectUtf16LeBom() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('info')
 			->with('The character set {0} was detected.', ['UTF-16LE']);
 
@@ -179,7 +179,7 @@ class FilterEncodingTest extends TestCase
 	public function testDetectUtf16Be() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('info')
 			->with('The character set {0} was detected.', ['UTF-16BE']);
 
@@ -192,7 +192,7 @@ class FilterEncodingTest extends TestCase
 	public function testDetectUtf16BeBom() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('info')
 			->with('The character set {0} was detected.', ['UTF-16BE']);
 
@@ -205,11 +205,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectMacintosh() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['MACINTOSH']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['MacOS Roman']);
 
@@ -222,11 +222,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectAsciiMacintosh() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['ASCII/MACOS ROMAN']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['MacOS Roman']);
 
@@ -239,11 +239,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectIbmPc() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['IBMPC']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['CP437']);
 
@@ -256,11 +256,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectIbm_Pc() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['IBM-PC']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['CP437']);
 
@@ -273,11 +273,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectIbm() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['IBM']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['CP437']);
 
@@ -290,11 +290,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectOem() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['OEM']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['CP437']);
 
@@ -307,11 +307,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectMsDos() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['MSDOS']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['CP850']);
 
@@ -324,11 +324,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectMs_Dos() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['MS-DOS']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['CP850']);
 
@@ -341,11 +341,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectIbmDos() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['IBM DOS']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['CP850']);
 
@@ -358,11 +358,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectWindows1250() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['WINDOWS-1250']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['Code Page 1250']);
 
@@ -375,11 +375,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectWindows1251() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['WINDOWS-1251']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['Windows-1251']);
 
@@ -392,11 +392,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectAnsi() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['ANSI']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['Windows-1252']);
 
@@ -409,11 +409,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectWindows() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['WINDOWS']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['Windows-1252']);
 
@@ -426,11 +426,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectIbm_Windows() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['IBM_WINDOWS']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['Windows-1252']);
 
@@ -443,11 +443,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectIbmWindows() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['IBM WINDOWS']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['Windows-1252']);
 
@@ -460,11 +460,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectCp1252() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['CP1252']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['Windows-1252']);
 
@@ -477,11 +477,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectIso_8859_1() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['ISO-8859-1']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['Windows-1252']);
 
@@ -494,11 +494,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectIso8859_1() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['ISO8859-1']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['Windows-1252']);
 
@@ -511,11 +511,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectIso8859() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['ISO8859']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['Windows-1252']);
 
@@ -528,11 +528,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectLatin1() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['LATIN1']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['Windows-1252']);
 
@@ -545,11 +545,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectInvalid() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('The character set {0} is invalid.', ['INVALID']);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['ASCII']);
 
@@ -562,11 +562,11 @@ class FilterEncodingTest extends TestCase
 	public function testDetectMissing() {
 		$logger = $this->createMock(LoggerInterface::class);
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('error')
 			->with('No character set was specified.');
 		$logger
-			->expects($this->once())
+			->expects(static::once())
 			->method('notice')
 			->with('The character set {0} was assumed.', ['ASCII']);
 
