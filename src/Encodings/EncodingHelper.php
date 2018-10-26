@@ -18,7 +18,7 @@ class EncodingHelper {
      *
      * @return AbstractEncodingUtf[]
      */
-    public function utf16MagicStrings() {
+    public function utf16MagicStrings(): array {
         $utf8    = new Utf8Encoding;
         $utf16be = new Utf16BeEncoding;
         $utf16le = new Utf16LeEncoding;
