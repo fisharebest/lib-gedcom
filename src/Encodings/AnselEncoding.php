@@ -208,6 +208,13 @@ class AnselEncoding extends AbstractEncodingLookup {
         "\x00u_WITH_HORN\x00" => "\xBD",
     ];
 
+    /**
+     * Convert a string from another encoding to UTF-8.
+     *
+     * @param string $text
+     *
+     * @return string
+     */
     public function toUtf8(string $text): string {
         // ANSEL diacritics are prefixes.  UTF-8 diacritics are suffixes.
         $text = preg_replace('/([\xE0-\xFF]+)(.)/', '$2$1', $text);
@@ -224,6 +231,13 @@ class AnselEncoding extends AbstractEncodingLookup {
         return $text;
     }
 
+    /**
+     * Convert a string from UTF-8 to another encoding.
+     *
+     * @param string $text
+     *
+     * @return string
+     */
     public function fromUtf8(string $text): string {
         // Convert precomposed characters to combining diacritics.
         $text = Normalizer::normalize($text, Normalizer::NFD);
