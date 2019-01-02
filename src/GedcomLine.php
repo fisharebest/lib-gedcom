@@ -110,7 +110,7 @@ class GedcomLine {
 
             // XREF
             if (!empty($match[self::REGEX_GEDCOM_LINE_XREF])) {
-                if (strlen($match[self::REGEX_GEDCOM_LINE_XREF]) > self::MAXIMUM_LENGTH_XREF) {
+                if (\strlen($match[self::REGEX_GEDCOM_LINE_XREF]) > self::MAXIMUM_LENGTH_XREF) {
                     $logger->warning(self::GEDCOM_LINE_XREF_LENGTH, [$line_number, $text, self::MAXIMUM_LENGTH_XREF]);
                 }
                 $this->setXref($match[self::REGEX_GEDCOM_LINE_XREF]);
@@ -152,7 +152,7 @@ class GedcomLine {
             }
 
             // Continuation lines cannot be designated as sub-structures.
-            if ($this->getXref() !== '' && in_array($this->getTag(), self::CONTINUATION_TAGS)) {
+            if ($this->getXref() !== '' && \in_array($this->getTag(), self::CONTINUATION_TAGS, true)) {
                 $logger->warning(self::GEDCOM_LINE_SUBSTRUCTURE_CONT, [$line_number, $text]);
                 $this->setXref('');
             }

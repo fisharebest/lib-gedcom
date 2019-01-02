@@ -25,7 +25,7 @@ abstract class AbstractEncodingLookup implements EncodingInterface {
         $utf8  = array_flip(static::TO_UTF8);
         $chars = preg_split('//u', $text, -1, PREG_SPLIT_NO_EMPTY);
         $chars = array_map(function ($char) use ($utf8) {
-            if (ord($char) < 128) {
+            if (\ord($char) < 128) {
                 return $char;
             } else {
                 return $utf8[$char] ?? '';
